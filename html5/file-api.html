@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>file-api</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+            #dropzone {
+              height: 150px;
+              width: 100%;
+              -webkit-border-radius: 10px;
+              -khtml-border-radius: 10px;
+              -moz-border-radius: 10px;
+              border-radius: 10px;
+              border: 2px dashed #0687FF;
+            }
+            #dropzone.rounded {
+              -webkit-box-shadow: inset 0px 0px 50px #777;
+              -moz-box-shadow: inset 0px 0px 50px #777;
+              -o-box-shadow: inset 0px 0px 50px #777;
+              box-shadow: inset 0px 0px 50px #777;
+            }
+            #dnd-thumbnails {
+              height: 125px;
+              margin-top: 10px;
+            }
+            #dnd-thumbnails img {
+              width: 75px;
+              height: 75px;
+              border: 1px solid black;
+              margin-right: 10px;
+              -webkit-transition: -webkit-transform 0.2s ease-in, margin-left 0.7s ease-in-out, margin-right 0.7s ease-in-out;
+              -moz-transition: -moz-transform 1s ease-in-out, margin-left 0.7s ease-in-out, margin-right 0.7s ease-in-out;
+              -o-transition: -o-transform 1s ease-in-out, margin-left 1s ease-in-out, margin-left 0.7s ease-in-out, margin-right 0.7s ease-in-out;
+            }
+            #dnd-thumbnails img:hover {
+              -webkit-transform: scale(3.0) rotate(10deg);
+              -webkit-transform-origin: 50% 75px;
+              -moz-transform: scale(3.0) rotate(10deg);
+              -moz-transform-origin: 50% 75px;
+              margin: 0 100px;
+            }
+          
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>file-api</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+
+            
+           <script>
+		            	function DNDFileController(id, thumbsId) {
+		  var el_ = document.getElementById(id);
+		  var thumbnails_ = document.getElementById(thumbsId);
+		
+		  this.dragenter = function(e) {
+		    e.stopPropagation();
+		    e.preventDefault();
+		    el_.classList.add('rounded');
+		  };
+		
+		  this.dragover = function(e) {
+		    e.stopPropagation();
+		    e.preventDefault();
+		  };
+		
+		  this.dragleave = function(e) {
+		    e.stopPropagation();
+		    e.preventDefault();
+		    el_.classList.remove('rounded');
+		  };
+		
+		  this.drop = function(e) {
+		    e.stopPropagation();
+		    e.preventDefault();
+		
+		    el_.classList.remove('rounded');
+		
+		    var files = e.dataTransfer.files;
+		
+		    for (var i = 0, file; file = files[i]; i++) {
+		      var imageType = /image.*/;
+		      if (!file.type.match(imageType)) {
+		        continue;
+		      }
+		
+		      var reader = new FileReader();
+		
+		      reader.onerror = function(evt) {
+		         var msg = 'Error ' + evt.target.error.code;
+		         switch (evt.target.error.code) {
+		           case FileError.NOT_READABLE_ERR:
+		             msg += ': NOT_READABLE_ERR';
+		             break;
+		         };
+		         alert(msg);
+		      };
+		
+		      reader.onload = (function(aFile) {
+		        return function(evt) {
+		          if (evt.target.readyState == FileReader.DONE) {
+		            thumbnails_.insertAdjacentHTML(
+		                'afterBegin', '<img src="' + evt.target.result + '" alt="' +
+		                aFile.name + '" title="' + aFile.name + '" />');
+		          }
+		        };
+		      })(file);
+		
+		      reader.readAsDataURL(file);
+		    }
+		
+		    return false;
+		  };
+		
+		  el_.addEventListener("dragenter", this.dragenter, false);
+		  el_.addEventListener("dragover", this.dragover, false);
+		  el_.addEventListener("dragleave", this.dragleave, false);
+		  el_.addEventListener("drop", this.drop, false);
+		};
+
+       </script>
+            
+            <script>
+            	
+              window.addEventListener('load', function(e) {
+                var dndc = new DNDFileController('dropzone', 'dnd-thumbnails');
+              }, false);
+            
+            </script>
+            
+            <div class="example">
+              <div id="dropzone" class="vbox boxcenter center">
+                Drop in images from your desktop
+              </div>
+            </div>
+            <div id="dnd-thumbnails" class="center"></div>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

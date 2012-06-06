@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>canvas-2d</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+              #canvas-area {
+                background: white;
+                -webkit-border-radius: 8px;
+                -khtml-border-radius: 8px;
+                -moz-border-radius: 8px;
+                border-radius: 8px;
+                border: 1px solid #bbb;
+              }
+            
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>canvas-2d</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+		<canvas id="canvas-area" width="838" height="225"></canvas>
+		<script>
+			
+              var canvasContext = document.getElementById("canvas-area").getContext("2d");
+              canvasContext.fillRect(250, 25, 150, 100);
+              canvasContext.beginPath();
+              canvasContext.arc(450, 110, 100, Math.PI * 1/2, Math.PI * 3/2, false);
+              canvasContext.lineWidth = 15;
+              canvasContext.lineCap = 'round';
+              canvasContext.strokeStyle = 'rgba(255, 127, 0, 0.5)';
+              canvasContext.stroke();
+            
+		</script>
+              
+            
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

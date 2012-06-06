@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>notifications-api</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>notifications-api</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+				<div id="notifications-message">
+          <p>
+            <button id="request-permission" href="#">Set notification permissions for this page</button>
+          </p>
+          <p>Note: Use this button if you also want to <em>reset</em> the permissions</p>
+
+          <br>
+          <p>Enter your twitter user name to show your last tweet as a notification</p>
+          <input type="text" id="username" placeholder="username">
+          <button id="show-tweets">Show tweet notifications</button>
+        </div>
+        <script>
+        	
+          document.getElementById('request-permission').addEventListener('click', function() {
+            window.webkitNotifications.requestPermission();
+          }, false);
+
+          document.getElementById('show-tweets').addEventListener('click', function() {
+            readTweets();
+          }, false);
+
+          function readTweets() {
+            var username = document.getElementById('username').value;
+            if (username == 'username') {
+              alert('Enter a username first');
+              return;
+            }
+            var script = document.createElement("script");
+            script.src = 'http://twitter.com/statuses/user_timeline/'+ username+'.json?count=1&callback=fetchTweets';
+            document.body.appendChild(script);
+          }
+
+          function fetchTweets(data) {
+            var tweet;
+            var i = data.length;
+            while (i--) {
+              tweet = data[i];
+              if (window.webkitNotifications.checkPermission() == 0) {
+                // note the show()
+                window.webkitNotifications.createNotification(tweet.user.profile_image_url, tweet.user.name, tweet.text).show();
+              } else {
+                // Note that we can't call requestPermission from here as we are in the callback function and not triggered just on user action
+                alert('You have to click on "Set notification permissions for this page" first to be able to receive notifications.');
+                return;
+              }
+            }
+          }
+          
+        </script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

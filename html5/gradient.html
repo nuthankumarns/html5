@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>gradient</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+            #gradients-linear-example {
+              border: 0;
+              height: 100px;
+              background: -moz-linear-gradient(90deg, #00abeb, #fff, #66cc00, #fff);
+              background: -webkit-gradient(linear, left top, left bottom, from(#00abeb), to(#fff), color-stop(0.5, #fff), color-stop(0.5, #66cc00));
+            }
+            #gradients-radial-example {
+              border: 0;
+              height: 100px;
+              background: -moz-radial-gradient(430px 50px, circle cover, red 0, #000 200px);
+              background: -webkit-gradient(radial, 430 50, 0, 430 50, 200, from(red), to(#000));
+            }
+          
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>gradient</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			
+			<div id="gradients-linear-example" class="example"></div><hr>
+			<input id="gradients-radial" type="range" min="1" max="800" value="200" onchange="changeGradients(event)">
+			background: -webkit-gradient(radial, 430 50, 0, 430 50, <span id="gradients-radial-value"></span>, from(red), to(#000))<div id="gradients-radial-example" class="example" style="background-image: -webkit-gradient(radial, 430 50, 0, 430 50, 82, from(red), to(rgb(0, 0, 0))); background-attachment: initial; background-origin: initial; background-clip: initial; background-color: initial; background-position: initial initial; background-repeat: initial initial; "></div>
+			<script>
+				
+              function changeGradients() {
+                var size = document.getElementById('gradients-radial').value;
+
+                document.getElementById('gradients-radial-example').style.background = 
+                    '-webkit-gradient(radial, 430 50, 0, 430 50, ' + size + ', from(red), to(#000))';
+
+                document.getElementById('gradients-radial-value').textContent = size;
+              }
+            
+			</script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

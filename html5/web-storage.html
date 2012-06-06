@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>web-storage</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<!--<meta name="viewport" content="width=device-width; initial-scale=1.0" />-->
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<!--<script src="http://code.jquery.com/jquery-1.7.2.js"></script>-->
+
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>web-storage</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			<div><textarea id="ta" placeholder="Type your text here"></textarea></div>
+				<div><button id="save-ta">Save</button><div></div>
+			<p id="ta-log"></p>
+			</div>
+					<script defer>
+	/*
+		var area=document.querySelector('#ta');
+			console.log(area);
+						// use localStorage for persistent storage
+			// use sessionStorage for per tab storage
+			document.querySelector('#save-ta').addEventListener('click', function () {
+			  window.localStorage.setItem('value', area.value);
+			  window.localStorage.setItem('timestamp', (new Date()).getTime());
+			}, false);
+			textarea.value = window.localStorage.getItem('value');
+			console.log(textarea.value);*/
+	
+	
+		
+		
+		
+		 
+		  (function(){
+								   try {
+						   (window.localStorage.getItem) // will throw in Firefox under some settings
+						 } catch(e){
+						   return; // quit because dom.storage.enabled is false
+						 }
+								   var area = document.querySelector('#ta');
+								 //  var area = document.getElementById("ta").value;
+								   console.log(area.value);
+						 // place content from previous edit
+						//console.log(typeof(area));
+						 if (typeof(area.value)!= null) {
+												   area.value = window.localStorage.getItem('value');
+												 }
+						
+						 updateLog(false);
+									 // your content will be saved locally
+						 document.querySelector('#save-ta').addEventListener('click', function () {
+						   window.localStorage.setItem('value', area.value);
+						   window.localStorage.setItem('timestamp', (new Date()).getTime());
+						   updateLog(true);
+						 }, false);
+								   function updateLog(new_save) {
+						   var log = document.querySelector("#ta-log");
+						   var delta = 0;
+						   if (window.localStorage.getItem('value')) {
+							 delta = ((new Date()).getTime() - (new Date()).setTime(window.localStorage.getItem('timestamp'))) / 1000;
+							 if (new_save) {
+							   log.textContent = 'Saved. Content will be available after browser refresh/reopen.';
+							   setTimeout(function() {
+								 log.textContent = '';
+							   }, 3000);
+							 } else {
+							   log.textContent = 'last saved: ' + delta + 's ago';
+							 }
+						   }
+						 }
+								 })();  
+		 
+		 
+				</script>
+				
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

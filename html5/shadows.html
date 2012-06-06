@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>shadows</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+            #shadow-example {
+              font-size: 75px;
+              margin: 10px 10px 30px 10px;
+              padding: 20px;
+              text-align: center;
+            }
+          
+		</style>
+		
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>shadows</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			<div id="shadow-example" class="example" style="text-shadow: rgba(64, 64, 64, 0.496094) -3px -2px 2px; -webkit-box-shadow: rgba(0, 0, 128, 0.246094) -2px -6px 0px; ">
+              Shadows example
+            </div>
+            text-shadow: 
+  rgba(64, 64, 64, 0.5) <br><span id="shadows-text-x-value"></span><input id="shadows-text-x" type="range" min="-9" max="9" value="0" onchange="changeShadow(event)"><br>
+  <span id="shadows-text-y-value"></span><input id="shadows-text-y" type="range" min="-9" max="9" value="0" onchange="changeShadow(event)"><br>
+  <span id="shadows-text-size-value"></span><input id="shadows-text-size" type="range" min="0" max="9" value="0" onchange="changeShadow(event)"><hr>
+  box-shadow: 
+  rgba(0, 0, 128, 0.25) <br><span id="shadows-box-x-value"></span><input id="shadows-box-x" type="range" min="-9" max="9" value="0" onchange="changeShadow(event)"><br>
+  <span id="shadows-box-y-value"></span><input id="shadows-box-y" type="range" min="-9" max="9" value="0" onchange="changeShadow(event)"><br>
+  <span id="shadows-box-size-value"></span><input id="shadows-box-size" type="range" min="0" max="9" value="0" onchange="changeShadow(event)">
+  
+            <script>
+			
+            function changeShadow() {
+              var el = document.getElementById('shadow-example');
+
+              var textXVal = document.getElementById('shadows-text-x').value;
+              var textYVal = document.getElementById('shadows-text-y').value;
+              var textSizeVal = document.getElementById('shadows-text-size').value;
+
+              document.getElementById('shadows-text-x-value').textContent = textXVal;
+              document.getElementById('shadows-text-y-value').textContent = textYVal;
+              document.getElementById('shadows-text-size-value').textContent = textSizeVal;
+
+              var boxXVal = document.getElementById('shadows-box-x').value;
+              var boxYVal = document.getElementById('shadows-box-y').value;
+              var boxSizeVal = document.getElementById('shadows-box-size').value;
+
+              document.getElementById('shadows-box-x-value').textContent = boxXVal;
+              document.getElementById('shadows-box-y-value').textContent = boxYVal;
+              document.getElementById('shadows-box-size-value').textContent = boxSizeVal;
+
+              el.style.textShadow = 'rgba(64, 64, 64, 0.5) ' + textXVal + 'px ' + textYVal + 'px ' + textSizeVal + 'px';
+              el.style.webkitBoxShadow = 'rgba(0, 0, 128, 0.25) ' + boxXVal + 'px ' + boxYVal + 'px ' + boxSizeVal + 'px';
+              el.style.MozBoxShadow = 'rgba(0, 0, 128, 0.25) ' + boxXVal + 'px ' + boxYVal + 'px ' + boxSizeVal + 'px';
+            }
+          
+		</script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

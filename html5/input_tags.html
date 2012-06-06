@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>input_tags</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			<style>
+			  [required] {
+			    border-color: #88a;
+			    -webkit-box-shadow: 0 0 3px rgba(0, 0, 255, .5);
+			  }
+			  :invalid {
+			    border-color: #e88;
+			    -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
+			  }
+</style>
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>input_tags</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+		<input type="text" required=""><hr>
+		<input type="email" value="some@email.com"><hr>
+		<input type="date" min="2010-08-14" max="2011-08-14" value="2010-08-14"><hr>
+		<input type="range" min="0" max="50" value="10"><hr>
+		<input results="10" type="search" placeholder="Search..."><hr>
+		<input type="tel" placeholder="(555) 555-5555" pattern="^\(?\d{3}\)?[-\s]\d{3}[-\s]\d{4}.*?$"><hr>
+		<input type="number" step="1" min="-5" max="10" value="0"><hr>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

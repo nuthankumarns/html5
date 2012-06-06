@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>css-color</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+            #hsl-example {
+              font-size: 75px;
+              padding-top: 20px;
+              padding-right: 0px;
+              padding-bottom: 20px;
+              padding-left: 0px;
+              text-align: center;
+              color: rgb(21, 147, 38);
+            }
+            .hsl-value {
+              display: inline-block;
+              width: 50px;
+            }
+          
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>css-color</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			<div id="hsl-example" class="example" style="color: rgba(10, 71, 18, 0.617188); ">
+              HSL example
+            </div>
+            <pre class="prettyprint"><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><b><span class="pln">hsla</span></b><span class="pun">(</span><span class="pln"><br>&nbsp; </span><span class="hsl-value" id="hsl-h-value">128</span><span class="pln"> </span><input id="hsl-h" type="range" min="0" max="360" value="128" onchange="changeHSL()"><span class="pln"><br>&nbsp; </span><span class="hsl-value" id="hsl-s-value">75%,</span><span class="pln"> </span><input id="hsl-s" type="range" min="0" max="100" value="75" onchange="changeHSL()"><span class="pln"><br>&nbsp; </span><span class="hsl-value" id="hsl-l-value">16%,</span><span class="pln"> </span><input id="hsl-l" type="range" min="0" max="100" value="33" onchange="changeHSL()"><span class="pln"><br>&nbsp; </span><span class="hsl-value" id="hsl-a-value">0.62);</span><span class="pln"> </span><input id="hsl-a" type="range" min="0" max="100" value="100" onchange="changeHSL()"><span class="pln"><br>&nbsp; &nbsp; &nbsp; &nbsp; </span></pre>
+            <script>
+            	
+              function changeHSL() {
+                var h = document.getElementById('hsl-h').value * 1.0;
+                var s = document.getElementById('hsl-s').value * 1.0;
+                var l = document.getElementById('hsl-l').value * 1.0;
+                var a = (document.getElementById('hsl-a').value / 100).toFixed(2);
+                var el = document.getElementById('hsl-example');
+
+                el.style.color = 'hsla(' + h + ', ' + s + '%, ' + l + '%, ' + a + ')';
+
+                document.getElementById('hsl-h-value').textContent = h;
+                document.getElementById('hsl-s-value').textContent = s + '%,';
+                document.getElementById('hsl-l-value').textContent = l + '%,';
+                document.getElementById('hsl-a-value').textContent = a + ');';
+              }
+
+              changeHSL();
+            
+            </script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

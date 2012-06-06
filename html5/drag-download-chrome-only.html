@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>drag-download-chrome-only</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>drag-download-chrome-only</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			<div class="example">
+              Drag each of these files onto your desktop:
+              <a href="http://static.googleusercontent.com/external_content/untrusted_dlcp/www.google.com/en/us/intl/en/landing/chrome/cadie/glasses.pdf" class="dragout" data-downloadurl="application/pdf:Chrome3DGlasses.pdf:http://static.googleusercontent.com/external_content/untrusted_dlcp/www.google.com/en/us/intl/en/landing/chrome/cadie/glasses.pdf" draggable="true">.pdf file</a>
+              <a href="src/star.mp3" class="dragout" data-downloadurl="audio/mpeg:star.mp3:http://slides.html5rocks.com/src/star.mp3" draggable="true">.mp3 file</a>
+            </div>
+            <script>
+            	
+              (function() {
+                var files = document.querySelectorAll('.dragout');
+                for (var i = 0, file; file = files[i]; ++i) {
+                  file.setAttribute('draggable', 'true'); // Don't really need, but good practice.
+                  file.addEventListener('dragstart', function(evt) {
+                    evt.dataTransfer.setData('DownloadURL', this.getAttribute('data-downloadurl'));
+                  }, false);
+                }
+              })();
+            
+            </script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

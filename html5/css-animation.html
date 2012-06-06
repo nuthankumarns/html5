@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>css-animation</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+            #animation-example {
+              font-family: Arial;
+              text-align: center;
+              line-height: 100px;
+            }
+            #animation-note { 
+              font-size: 10px;
+            }
+            /* presently webkit-only */
+            @-webkit-keyframes pulse {
+             from {
+               opacity: 0.0;
+               font-size: 50px;
+             }
+             to {
+               opacity: 1.0;
+               font-size: 100px;
+             }
+            }
+
+            #animation-example {
+              -webkit-animation-name: pulse;
+              -webkit-animation-duration: 2s;
+              -webkit-animation-iteration-count: infinite;
+              -webkit-animation-timing-function: ease-in-out;
+              -webkit-animation-direction: alternate;
+            }
+          
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>css-animation</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			<div id="animation-example" class="example">
+              Pulse!
+            </div>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

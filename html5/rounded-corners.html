@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>rounded-corners</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+          #doraemon {
+            height: 320px;
+          }
+          #doraemon iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+          }
+          
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>rounded-corners</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+				<div id="doraemon" class="example">
+              <iframe _src="src/rounded/write_doraemon.html" src="src/rounded/write_doraemon.html"></iframe>
+            </div>
+             face: border-radius: <span id="face-rounded-border-value"></span>px; <input id="face-rounded-border" type="range" min="0" max="146" value="0" onchange="handleCorner(event)"><br>
+              left eye: border-radius: <span id="lefteye-rounded-border-value"></span>px; <input id="lefteye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)"><br>
+              right eye: border-radius: <span id="righteye-rounded-border-value"></span>px; <input id="righteye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)"><br>
+              base white: border-radius: <span id="base_white-rounded-border-value"></span>px; <input id="base_white-rounded-border" type="range" min="0" max="150" value="0" onchange="handleCorner(event)"><br>
+              mouth: border-radius: <span id="mouth-rounded-border-value"></span>px; <input id="mouth-rounded-border" type="range" min="0" max="120" value="0" onchange="handleCorner(event)"><br>
+              nose: border-radius: <span id="nose-rounded-border-value"></span>px; <input id="nose-rounded-border" type="range" min="0" max="50" value="0" onchange="handleCorner(event)"><br>
+              left black eye: border-radius: <span id="leftblackeye-rounded-border-value"></span>px; <input id="leftblackeye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)"><br>
+              right black eye: border-radius: <span id="rightblackeye-rounded-border-value">0</span>px; <input id="rightblackeye-rounded-border" type="range" min="0" max="35" value="0" onchange="handleCorner(event)">
+			<script>
+				
+              function handleCorner() {
+                var doraemon = document.querySelector('#doraemon iframe').contentWindow.document;
+                 var elements = ["face", "lefteye", "righteye", "base_white", "mouth", "nose", "leftblackeye", "rightblackeye"];
+                 for (var i = 0; i < elements.length; i++) {
+                   var element = elements[i] + '-rounded-border';
+                   var borderVal = document.getElementById(element).value;
+                   document.getElementById(element + '-value').textContent = borderVal;
+                   var faceEl = doraemon.getElementById(elements[i]);
+                   faceEl.style.borderRadius = borderVal + 'px';
+                   faceEl.style.mozBorderRadius = borderVal + 'px';
+                 }
+               }
+			</script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

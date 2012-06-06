@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>geo-location-api</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<style>
+	
+            #see-position {
+              margin-bottom: 10px;
+            }
+            #geo-map {
+              height: 280px;
+              width: 640px;
+            }
+            #geo-log {
+              background-color: red;
+              color: white;
+              padding: 5px;
+              border-radius: 5px;
+              visibility: hidden;
+            }
+          
+</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>geo-location-api</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+			<button id="see-position">Show Position</button>
+			<span id="geo-log"></span>
+			<div id="geo-map" class="gmap example">
+            <img src="http://maps.google.com/maps/api/staticmap?center=37.4419,-94.1419&amp;zoom=3&amp;size=680x278&amp;sensor=true">
+          </div>
+          <script>
+          	
+          (function() {
+            var map = null;
+            var geolog = document.querySelector('#geo-log');
+            var geoMap = document.querySelector('#geo-map');
+
+            function showPosition(position) {
+              geolog.textContent = "You're within " + position.coords.accuracy +
+                  " meters of (" + position.coords.latitude + ", " +
+                  position.coords.longitude + ")";
+              var latLng = new google.maps.LatLng(
+                  position.coords.latitude, position.coords.longitude);
+              var marker = new google.maps.Marker({
+                position: latLng,
+                map: map
+              });
+              map.setCenter(latLng);
+              map.setZoom(15);
+            }
+
+            function handlePositionError(evt) {
+              geolog.textContent = evt.message;
+            }
+
+            function successPositionHandler(evt) {
+              // Load map if it doesn't already exist and when user clicks the button.
+              if (!map) {
+                map = new google.maps.Map(geoMap, {
+                  zoom: 3,
+                  center: new google.maps.LatLng(37.4419, -94.1419), // United States
+                  mapTypeId: google.maps.MapTypeId.ROADMAP
+                });
+                map.getDiv().style.border =  '1px solid #ccc';
+              }
+
+              if (navigator.geolocation) {
+                geolog.style.visibility = 'visible';
+                geolog.textContent = 'Looking for location...';
+                navigator.geolocation.getCurrentPosition(showPosition, handlePositionError);
+                // Also monitor position as it changes.
+                //navigator.geolocation.watchPosition(showPosition, handlePositionError);
+              } else {
+                geolog.textContent = 'Oops! Your browser does not support geolocation.';
+              }
+            }
+
+            document.querySelector('#see-position').addEventListener('click', successPositionHandler, false);
+            geoMap.addEventListener('click', successPositionHandler, false);
+          })();
+          
+          </script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>

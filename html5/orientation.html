@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>orientation</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Nuthan" />
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<style>
+			
+            #slide-orientation section {
+              height: 100%;
+            }
+            #orientationWrap {
+              width: 300px;
+              height: 300px;
+              position: relative;
+            }
+            #slide-orientation p {
+              display: none;
+              text-align: center;
+            }
+            #orientationWrap .layer {
+              position: absolute;
+              left: 50%;
+              top: 0;
+              -webkit-transition-property: x, y;
+              -webkit-transition-duration: 0.1s;
+              -webkit-transition-timing-function: linear;
+              -moz-transition-property: x, y;
+              -moz-transition-duration: 0.1s;
+              -moz-transition-timing-function: linear;
+            }
+          
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<header>
+				<h1>orientation</h1>
+			</header>
+			<nav>
+				<p>
+					<a href="/">Home</a>
+				</p>
+				<p>
+					<a href="/contact">Contact</a>
+				</p>
+			</nav>
+
+			<div>
+
+			</div>
+				<div class="flex hbox boxcenter">
+            <div id="orientationWrap" class="noflex vbox boxcenter">
+              <div class="layer" style="left: 0px; top: 0px; -webkit-transform: rotateY(0deg) rotateX(0deg); "><img src="src/chrome-layer-01.png"></div>
+              <div class="layer" style="left: 0px; top: 0px; -webkit-transform: rotateY(0deg) rotateX(0deg); "><img src="src/chrome-layer-02.png"></div>
+              <div class="layer" style="left: 0px; top: 0px; -webkit-transform: rotateY(0deg) rotateX(0deg); "><img src="src/chrome-layer-03.png"></div>
+              <div class="layer" style="left: 0px; top: 0px; -webkit-transform: rotateY(0deg) rotateX(0deg); "><img src="src/chrome-layer-04.png"></div>
+              <div class="layer" style="left: 0px; top: 0px; -webkit-transform: rotateY(0deg) rotateX(0deg); "><img src="src/chrome-layer-05.png"></div>
+            </div>
+          </div>
+          
+          <script>
+          	
+            function OrientationSlide(slide) {
+              this._slide = document.querySelector(slide);
+              this._lastBeta = 0;
+              this._lastGamma = 0;
+            }
+            OrientationSlide.prototype.orientationListener = function(evt) {
+              // For FF3.6+
+              if (!evt.gamma && !evt.beta) {
+                evt.gamma = -(evt.x * (180 / Math.PI));
+                evt.beta = -(evt.y * (180 / Math.PI));
+              }
+
+              var overThreshold = Math.abs(evt.gamma) > 4 || Math.abs(evt.beta) > 4;
+              var gamma = overThreshold ? evt.gamma : 0;
+              var beta = overThreshold ? evt.beta : 0;
+
+              if (this._lastGamma != gamma || this._lastBeta != beta) {
+                var zindex = 0;
+                var layers = document.querySelectorAll('.layer');
+                for (var i = 0, elem; elem = layers[i]; ++i) {
+                  zindex++;
+                  var x = Math.round(1.5 * gamma * zindex);
+                  var y = Math.round(1.5 * beta * zindex);
+                  var style = elem.style;
+                  style.left = x.toString() + 'px';
+                  style.top = y.toString() + 'px';
+                  style.webkitTransform = 'rotateY(' + (-2.0 * gamma) + 'deg) rotateX(' + (-2.0 * beta) + 'deg)';
+                  style.MozTransform = 'rotateY(' + (-2.0 * gamma) + 'deg) rotateX(' + (-2.0 * beta) + 'deg)';
+                }
+                this._lastGamma = gamma;
+                this._lastBeta = beta;
+              }
+            };
+            OrientationSlide.prototype.onunload = function(evt) {
+              window.removeEventListener('deviceorientation', this.orientationListener, false);
+              window.removeEventListener('MozOrientation', this.orientationListener, false);
+            };
+            OrientationSlide.prototype.onload = function(evt) {
+              window.addEventListener('deviceorientation', this.orientationListener, false);
+              window.addEventListener('MozOrientation', this.orientationListener, false);
+            };
+            var os = new OrientationSlide('#slide-orientation');
+
+            if (!('ondeviceorientation' in window) &&
+                !(window.onmozorientation)) {
+              document.querySelector('#slide-orientation p').style.display = 'block';
+            }
+          
+          </script>
+			<footer>
+				<p>
+					&copy; Copyright  by Nuthan
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>
